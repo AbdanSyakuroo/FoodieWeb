@@ -3,281 +3,1393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- font in this web -->
+    <title>Foodie - Premium Restaurant Experience</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,300&display=swap" rel="stylesheet">
-
-<!-- mystyle -->
-<link rel="stylesheet" href="style.css">
-
-<div class="icon">
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-brands/css/uicons-brands.css'>
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
-</div>
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #D74D00;
+            --secondary-color: #FFBD12;
+            --accent-color: #FF6B35;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --white: #ffffff;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #28b982;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--light-color);
+        }
+        
+        .container {
+            width: 100%;
+        }
+        
+        /* Navigation */
+        .navbar {
+            width: 100%;
+            background-color: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(15px);
+            height: 80px;
+            z-index: 9999;
+            position: fixed;
+            top: 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .navbar.scrolled {
+            height: 70px;
+            background-color: rgba(26, 26, 26, 0.98);
+        }
+        
+        .nav-container {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            max-width: 1400px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            letter-spacing: 1px;
+        }
+        
+        .logo span:first-child {
+            color: var(--white);
+        }
+        
+        .logo span:last-child {
+            color: var(--secondary-color);
+        }
+        
+        .menu {
+            display: flex;
+        }
+        
+        .menu ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .menu ul li {
+            margin-left: 30px;
+        }
+        
+        .menu a {
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            transition: var(--transition);
+            padding: 5px 0;
+            letter-spacing: 0.5px;
+        }
+        
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .menu a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .menu a:hover::after {
+            width: 100%;
+        }
+        
+        .menu a.active {
+            color: var(--secondary-color);
+        }
+        
+        .menu a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .mobile-menu-btn i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: var(--transition);
+        }
+        
+        /* Hero Section */
+        .hero {
+            width: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('Asset2/yoav-aziz-AiHJiRCwB3w-unsplash.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+        
+        .hero-content {
+            width: 90%;
+            margin: auto;
+            color: var(--white);
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            animation: fadeInUp 1s ease;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: -1px;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 550px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 8px 25px rgba(215, 77, 0, 0.3);
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            z-index: -1;
+            transition: var(--transition);
+            opacity: 0;
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(215, 77, 0, 0.4);
+        }
+        
+        /* About Section */
+        .about {
+            width: 100%;
+            background-color: var(--dark-color);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+        
+        .section-container {
+            width: 90%;
+            margin: auto;
+            max-width: 1400px;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-text {
+            flex: 1;
+            color: var(--white);
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--white) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        
+        .section-header p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 50px 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .feature-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, rgba(40, 185, 130, 0.1), rgba(40, 185, 130, 0.2));
+            color: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 36px;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-icon {
+            background: linear-gradient(135deg, var(--success), rgba(40, 185, 130, 0.3));
+            transform: scale(1.1);
+        }
+        
+        .feature-card h3 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            letter-spacing: -0.3px;
+        }
+        
+        .feature-card p {
+            font-size: 16px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        /* Menu Section */
+        .menu-section {
+            width: 100%;
+            background-color: var(--dark-color);
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjAyKSIvPjwvcGF0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+            opacity: 0.05;
+        }
+        
+        .menu-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .menu-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        
+        .menu-header p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .menu-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+        
+        .menu-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .menu-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .menu-card-content {
+            padding: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .menu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .menu-card-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: -0.3px;
+        }
+        
+        .menu-card-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 50px;
+        }
+        
+        .menu-card-rating {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        
+        .menu-card-rating i {
+            color: var(--secondary-color);
+            margin-left: 2px;
+        }
+        
+        .menu-card-body {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        /* Contact Section */
+        .contact {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--white) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+        
+        .contact-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 2;
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--dark-color);
+            letter-spacing: -0.3px;
+        }
+        
+        .contact-details {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-detail h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            position: relative;
+            letter-spacing: -0.2px;
+        }
+        
+        .contact-detail h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        .contact-detail p {
+            font-size: 16px;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .contact-btn {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .contact-btn a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 40px;
+            background-color: var(--white);
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 0.5px;
+        }
+        
+        .contact-btn a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-color), var(--primary-color));
+            z-index: -1;
+            transition: var(--transition);
+            opacity: 0;
+        }
+        
+        .contact-btn a:hover::before {
+            opacity: 1;
+        }
+        
+        .contact-btn a:hover {
+            color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer Section */
+        .footer {
+            width: 100%;
+            background-color: var(--dark-color);
+            padding: 100px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 70px;
+        }
+        
+        .footer-brand {
+            text-align: center;
+        }
+        
+        .footer-brand .logo {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+        
+        .footer-brand p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 25px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover .social-icon {
+            transform: scale(1.1);
+        }
+        
+        .social-text h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 5px;
+            letter-spacing: -0.2px;
+        }
+        
+        .social-text p {
+            font-size: 15px;
+            color: var(--gray);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 15px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 64px;
+            }
+            
+            .section-title {
+                font-size: 42px;
+            }
+            
+            .section-header h2 {
+                font-size: 42px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+                gap: 50px;
+            }
+            
+            .contact-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .contact-details {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 48px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .section-header h2 {
+                font-size: 36px;
+            }
+            
+            .menu ul li {
+                margin-left: 15px;
+            }
+            
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(26, 26, 26, 0.98);
+                padding: 20px 0;
+                z-index: 999;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+                transition: var(--transition);
+            }
+            
+            .menu.active {
+                display: flex;
+            }
+            
+            .menu ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .menu ul li {
+                margin: 15px 0;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .social-link {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 30px;
+            }
+            
+            .section-header h2 {
+                font-size: 30px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 15px 30px;
+                font-size: 15px;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image, .about-text {
+                width: 100%;
+            }
+            
+            .contact-info, .contact-btn {
+                width: 100%;
+            }
+            
+            .contact-details {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="container1">
-            <div class="container1-1">
-                <div class="navigasi">
-                    <div class="logo">
-                        <span style="color: white;">Food</span><span style="color:#FFBD12;">ie</span>
-                    </div>
-                    <div class="menu">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#work">Work</a></li>
-                            <li><a href="#menumakan">Menu</a></li>
-                            <li><a href="#contact">Contact us</a></li>
-                            <li><a href="#social">Social</a></li>
-                        </ul>
-                    </div> 
-                </div>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span>Food</span><span>ie</span>
             </div>
-                <div class="hero" >
-                    <div class="judul">
-                        <h1>Delivered <br>
-                            Hot & Fresh</h1>
-                            <p>Healthy switcher chefs do all the prep work, 
-                                like peeding chopping & morinating, 
-                                so you can cook a fresh food</p>
-                                <div class="button">
-                                    <div class="order-now"> <a href="#menumakan">Order now</a></div>
-                                </div>
-                    </div>
-                </div>
+            <div class="menu" id="menu">
+                <ul>
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#work" class="nav-link">Work</a></li>
+                    <li><a href="#menu2" class="nav-link">Menu</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="#social" class="nav-link">Social</a></li>
+                </ul>
             </div>
-            <div class="container2" id="about">
-                <div class="isiabout">
-                    <div class="gambar1">
-                       <img src="Asset2/makanan3.jpg" alt="">
-                    </div>
-                    <div class="Teksabout">
-                        <h1>Food Is An Important <br>Part Of A Balanced Diet</h1>
-                        <p>The actually assured me over and over that take little time off and come back and work. Fast forward taw weeks after. We are going for a new project. <br> <br>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-times" style="display: none;"></i>
+            </button>
+        </div>
+    </nav>
 
-                          I wrote to let them know ready to come back they kicked me of their team slack all of us are make company email.</p>
-                    </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">Delivered Hot & Fresh</h1>
+            <p class="hero-subtitle">Healthy switcher chefs do all the prep work, like peeding chopping & marinating, so you can cook a fresh food.</p>
+            <a href="#menu2" class="btn">Order Now</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="Asset2/makanan3.jpg" alt="Delicious Food">
                 </div>
-            </div>
-            <div class="container3" id="work">
-               <div class="isiwork">
-                  <div class="heading">
-                     <h1>HOW IT WORK</h1>
-                     <p>It's through mistakes that you actually can grow you get rid of everything that is not essential to making have to get bad</p>
-                  </div>
-                  <div class="grid">
-                    <div class="isigrid">
-                      <div class="ikongrid"><i class="fi fi-sr-salad"></i></div>
-                      <h2>Pick Meals</h2>
-                      <p>Consume meals from our diverse weekly menu. Find gluten or dairy free, low carb & veggie options</p>
-                    </div>
-                    <div class="isigrid">
-                      <div class="ikongrid"><i class="fi fi-rs-shipping-fast"></i></div>
-                      <h2>Fast Delivery</h2>
-                      <p>Your freshly prepped 15 min dinner kits arrive on your doorstep in a refrigerated box</p>
-                    </div>
-                    <div class="isigrid">
-                      <div class="ikongrid"><i class="fi fi-ss-room-service"></i></div>
-                      <h2>Choose 
-                        How Often</h2>
-                        <p>Our team of chefs do the prep work no more chopping, meansure, or sink full of dishes</p>
-                    </div>
-                    
-                  </div>
-               </div>
-            </div>
-            <div class="container4" id="menumakan">
-                <div class="fillmenu">
-                    <div class="heading-2">
-                        <h1>Explore Our Best Menu</h1>
-                        <p>it's through mistakes that you actually can grow you get rid of everything that is not essensial to making have to get bad</p>
-                    </div>
-                    <div class="grid-card">
-                        <div class="isi-card">
-                            <img src="Asset2/sebastian-coman-photography-Co-T6odt0es-unsplash.jpg">
-                            <div class="card-header">
-                              <div><i><b>12.00$</b></i></div>
-                              <div class="card-header-bottom">
-                                <div>Rose Muffen</div>
-                                <div class="star">⭐⭐⭐</div>
-                              </div>
-                            </div>
-                            <div class="card-body">
-                              <p>
-                                Serve with French Fries + Drink <br>        
-                                Choice of : Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
-                              </p>
-                            </div>
-                          </div>
-                        
-                            <div class="isi-card">
-                                <img src="Asset2/ella-olsson-KPDbRyFOTnE-unsplash.jpg">
-                                <div class="card-header">
-                                  <div><i><b>10.00$</b></i></div>
-                                  <div class="card-header-bottom">
-                                    <div>Salads Special</div>
-                                    <div class="star">⭐⭐</div>
-                                  </div>
-                                </div>
-                                <div class="card-body">
-                                  <p>
-                                    Serve with French Fries + Drink <br>        
-                                    Choice of : Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
-                                  </p>
-                                </div>
-                              </div>
-                        
-                        
-                            <div class="isi-card">
-                                <img src="Asset2/hermes-rivera-OzBLe_Eg1mg-unsplash.jpg">
-                                <div class="card-header">
-                                  <div><i><b>14.00$</b></i></div>
-                                  <div class="card-header-bottom">
-                                    <div>Egg Muffen</div>
-                                    <div class="star">⭐⭐⭐</div>
-                                  </div>
-                                </div>
-                                <div class="card-body">
-                                  <p>
-                                    Serve with French Fries + Drink <br>        
-                                    Choice of : Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
-                                  </p>
-                                </div>
-                              </div>
-                        
-                        
-                            <div class="isi-card">
-                                <img src="Asset2/romain-briaux-G7eI_KNp7iw-unsplash.jpg">
-                                <div class="card-header">
-                                  <div><i><b>12.00$</b></i></div>
-                                  <div class="card-header-bottom">
-                                    <div>Veggie Muffen</div>
-                                    <div class="star">⭐⭐⭐</div>
-                                  </div>
-                                </div>
-                                <div class="card-body">
-                                  <p>
-                                    Serve with French Fries + Drink <br>        
-                                    Choice of : Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
-                                  </p>
-                                </div>
-                              </div>
-                        
-                        
-                            <div class="isi-card">
-                                <img src= "Asset2/charlesdeluvio-wr8Ze_O-sjI-unsplash.jpg">
-                                <div class="card-header">
-                                  <div><i><b>12.00$</b></i></div>
-                                  <div class="card-header-bottom">
-                                    <div>Egg Musala</div>
-                                    <div class="star">⭐⭐⭐</div>
-                                  </div>
-                                </div>
-                                <div class="card-body">
-                                  <p>
-                                    Serve with French Fries + Drink <br>        
-                                    Choice of : Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
-                                  </p>
-                                </div>
-                              </div>
-                        
-                        
-                            <div class="isi-card">
-                                <img src="Asset2/louis-hansel-cdR6i9i4jwI-unsplash.jpg" >
-                                <div class="card-header">
-                                  <div><i><b>15.00$</b></i></div>
-                                  <div class="card-header-bottom">
-                                    <div>Salads</div>
-                                    <div class="star">⭐⭐⭐⭐⭐</div>
-                                  </div>
-                                </div>
-                                <div class="card-body">
-                                  <p>
-                                    Serve with French Fries + Drink <br>        
-                                    Choice of : Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
-                                  </p>
-                                </div>
-                              </div>
-                        
-                        <div class="linkscroll"> <span style="color: black;" id="contact">laokoa</span></div>
-                    </div>
+                <div class="about-text">
+                    <h2 class="section-title">Food Is An Important Part Of A Balanced Diet</h2>
+                    <p>The actually assured me over and over that take little time off and come back and work. Fast forward taw weeks after. We are going for a new project.</p>
+                    <p>I wrote to let them know ready to come back they kicked me of their team slack all of us are make company email.</p>
                 </div>
-            </div>
-            <div class="container5">
-              <div class="isikontak">
-                <div class="kotak">
-                  <div class="judulkotak">
-                     <h1>Are you interested in our dishes?</h1>
-                     <div class="info">
-                        <div class="infobawah">
-                           <h2>Open Hours</h2>
-                           <p>Today <br>
-                            10:00 am - 7:00 pm <br>
-                            Working Hours</p>
-                        </div>
-                        <div class="infobawah2">
-                          <h2>Get Direction :</h2>
-                          <p>Poras Street 07 <br>
-                            (0251) 8376 674 <br>
-                             Call Online</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="tombolkontak">
-                     <div class="kontak">
-                        <div class="grup">
-                           <div class="ikonuser"><i class="fi fi-ss-user"></i></div>
-                           <div class="tulisan">CONTACT US</div>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="container6" id="social">
-              <div class="footer-end-page">
-                  <div class="titlerestaurant">
-                     <span style="color: white;">Food</span><span style="color:#FFBD12;">ie</span>
-                     <div class="titlesocial">Social Media the restaurant </div>
-                  </div>
-                  <div class="social-fb-insta-twitter">
-                      <div class="instagram">
-                         <div class="ikon"><i class="fi fi-brands-instagram"></i></div>
-                         <div class="teksakun">
-                            <div class="Judulteks">Instagram account :</div>
-                            <div class="Ket-akun">@Foodie_poras1234</div>
-                         </div>
-                      </div>
-                      <div class="Facebook">
-                        <div class="ikon"><i class="fi fi-brands-facebook"></i></div>
-                        <div class="teksakun">
-                           <div class="Judulteks">Facebook account :</div>
-                           <div class="Ket-akun">@Foodienih__</div>
-                        </div>
-                     </div>
-                     <div class="twitter">
-                      <div class="ikon"><i class="fi fi-brands-twitter"></i></div>
-                      <div class="teksakun">
-                         <div class="Judulteks">Twitter account :</div>
-                         <div class="Ket-akun">@Foodieaja_234</div>
-                      </div>
-                   </div>
-                  </div>
-              </div>
-            </div>
-            <div class="container7">
-              <p>Copyright ©2023. All Rights Reserved. — Designed with love by Abdan Syakuro</p>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="work">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>HOW IT WORK</h2>
+                <p>It's through mistakes that you actually can grow you get rid of everything that is not essential to making have to get bad</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Pick Meals</h3>
+                    <p>Consume meals from our diverse weekly menu. Find gluten or dairy free, low carb & veggie options</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Fast Delivery</h3>
+                    <p>Your freshly prepped 15 min dinner kits arrive on your doorstep in a refrigerated box</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Choose How Often</h3>
+                    <p>Our team of chefs do the prep work no more chopping, meansure, or sink full of dishes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu2">
+        <div class="section-container">
+            <div class="menu-header">
+                <h2>Explore Our Best Menu</h2>
+                <p>It's through mistakes that you actually can grow you get rid of everything that is not essential to making have to get bad</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <img src="Asset2/sebastian-coman-photography-Co-T6odt0es-unsplash.jpg" alt="Rose Muffen">
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <div class="menu-card-title">Rose Muffen</div>
+                            <div class="menu-card-price">$12.00</div>
+                        </div>
+                        <div class="menu-card-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="menu-card-body">
+                            Serve with French Fries + Drink. Choice of: Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card">
+                    <img src="Asset2/ella-olsson-KPDbRyFOTnE-unsplash.jpg" alt="Salads Special">
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <div class="menu-card-title">Salads Special</div>
+                            <div class="menu-card-price">$10.00</div>
+                        </div>
+                        <div class="menu-card-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="menu-card-body">
+                            Serve with French Fries + Drink. Choice of: Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card">
+                    <img src="Asset2/hermes-rivera-OzBLe_Eg1mg-unsplash.jpg" alt="Egg Muffen">
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <div class="menu-card-title">Egg Muffen</div>
+                            <div class="menu-card-price">$14.00</div>
+                        </div>
+                        <div class="menu-card-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="menu-card-body">
+                            Serve with French Fries + Drink. Choice of: Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card">
+                    <img src="Asset2/romain-briaux-G7eI_KNp7iw-unsplash.jpg" alt="Veggie Muffen">
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <div class="menu-card-title">Veggie Muffen</div>
+                            <div class="menu-card-price">$12.00</div>
+                        </div>
+                        <div class="menu-card-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="menu-card-body">
+                            Serve with French Fries + Drink. Choice of: Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card">
+                    <img src="Asset2/charlesdeluvio-wr8Ze_O-sjI-unsplash.jpg" alt="Egg Musala">
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <div class="menu-card-title">Egg Musala</div>
+                            <div class="menu-card-price">$12.00</div>
+                        </div>
+                        <div class="menu-card-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="menu-card-body">
+                            Serve with French Fries + Drink. Choice of: Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="menu-card">
+                    <img src="Asset2/louis-hansel-cdR6i9i4jwI-unsplash.jpg" alt="Salads">
+                    <div class="menu-card-content">
+                        <div class="menu-card-header">
+                            <div class="menu-card-title">Salads</div>
+                            <div class="menu-card-price">$15.00</div>
+                        </div>
+                        <div class="menu-card-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="menu-card-body">
+                            Serve with French Fries + Drink. Choice of: Cake, Fanta, Sprite, Upgrade to large fries, Add whopper party, add tender crisp patty and more
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Are you interested in our dishes?</h2>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <h3>Open Hours</h3>
+                            <p>Today</p>
+                            <p>10:00 am - 7:00 pm</p>
+                            <p>Working Hours</p>
+                        </div>
+                        <div class="contact-detail">
+                            <h3>Get Direction</h3>
+                            <p>Poras Street 07</p>
+                            <p>(0251) 8376 674</p>
+                            <p>Call Online</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-btn">
+                    <a href="#contact">
+                        <i class="fas fa-user"></i>
+                        <span>CONTACT US</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer" id="social">
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span>Food</span><span>ie</span>
+                    </div>
+                    <h3>Premium Restaurant Experience</h3>
+                    <p>Delivering delicious meals with passion and excellence since 2023</p>
+                </div>
+                <div class="social-links">
+                    <div class="social-link">
+                        <div class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div class="social-text">
+                            <h4>Instagram</h4>
+                            <p>@Foodie_poras1234</p>
+                        </div>
+                    </div>
+                    <div class="social-link">
+                        <div class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div class="social-text">
+                            <h4>Facebook</h4>
+                            <p>@Foodienih__</p>
+                        </div>
+                    </div>
+                    <div class="social-link">
+                        <div class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </div>
+                        <div class="social-text">
+                            <h4>Twitter</h4>
+                            <p>@Foodieaja_234</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>Copyright ©2023. All Rights Reserved. — Designed with love by Abdan Syakuro</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('menu');
+        const barsIcon = mobileMenuBtn.querySelector('.fa-bars');
+        const timesIcon = mobileMenuBtn.querySelector('.fa-times');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            menu.classList.toggle('active');
+            
+            if (menu.classList.contains('active')) {
+                barsIcon.style.display = 'none';
+                timesIcon.style.display = 'block';
+            } else {
+                barsIcon.style.display = 'block';
+                timesIcon.style.display = 'none';
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        menu.classList.remove('active');
+                        barsIcon.style.display = 'block';
+                        timesIcon.style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Active navigation link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            parallax.style.backgroundPositionY = -(scrolled * 0.5) + 'px';
+        });
+    </script>
 </body>
 </html>
